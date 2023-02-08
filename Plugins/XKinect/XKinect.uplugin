@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "XKinect",
+	"Description": "Testing Kinect on UE4.",
+	"Category": "Other",
+	"CreatedBy": "Khosbilegt B.",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "XKinect",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
