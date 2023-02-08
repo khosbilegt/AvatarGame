@@ -8,7 +8,9 @@ AKinectActor::AKinectActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	initKinect();
+	root = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("root"));
+	bodyFrameReader = nullptr;
 }
 
 // Called when the game starts or when spawned
@@ -22,7 +24,6 @@ void AKinectActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	updateBodyFrame();
-
 }
 
 bool AKinectActor::initKinect() {
@@ -36,6 +37,7 @@ bool AKinectActor::initKinect() {
 	}
 	return false;
 }
+
 void AKinectActor::initBodyFrame() {
 	IBodyFrameSource* bodyFrameSource;
 	HRESULT hResult = sensor->get_BodyFrameSource(&bodyFrameSource);
@@ -81,4 +83,43 @@ void AKinectActor::updateBodyFrame() {
 	if (bodyFrame) {
 		bodyFrame->Release();
 	}
+}
+
+FRotator AKinectActor::OrientToFRotator(JointOrientation orientation, int i) {
+	float w1 = -orientation.Orientation.w;
+	float x1 = -orientation.Orientation.y;
+	float y1 = -orientation.Orientation.x;
+	float z1 = -orientation.Orientation.z;
+
+	float w2 = 0;
+	float x2 = 0;
+	float y2 = 1;
+	float z2 = 0;
+
+	if (i == 1 || i == 2 || i == 20) {
+		return FRotator(FQuat(
+			-w1 * w2 + x1 * x2 + y1 * y2 + z1 * z2,
+			w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2,
+			w1 * y2 + y1 * w2 + z1 * x2 - x1 * z2,
+			w1 * z2 + z1 * w2 + x1 * y2 - y1 * x2
+		));
+	}
+	return FRotator(FQuat(w1, x1, y1, z1));
+}
+
+FVector AKinectActor::getJointPosition(int ind) {
+	return FVector(0, 0, 0);
+}
+
+FRotator AKinectActor::getJointRotation(int ind) {
+	return orientations[ind];
+}
+
+
+bool AKinectActor::getRightHandState() {
+	return rightHandState == HandState_Closed;
+}
+
+bool AKinectActor::getLeftHandState() {
+	return leftHandState == HandState_Closed;
 }

@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
+#include "GameFramework/Actor.h"
 #define WIN32_LEAN_AND_MEAN
+THIRD_PARTY_INCLUDES_START
+#include <Kinect.h>
 #include "Kinect.h"
-#include <math.h>
-
+THIRD_PARTY_INCLUDES_END
 #include "KinectActor.generated.h"
 
 UCLASS()
@@ -44,5 +45,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Kinect")
 		FVector getJointPosition(int ind);
 	UFUNCTION(BlueprintCallable, Category = "Kinect")
-		FVector getJointRotation(int ind);
+		FRotator getJointRotation(int ind);
+	UFUNCTION(BlueprintCallable, Category = "Kinect")
+		bool getLeftHandState();
+	UFUNCTION(BlueprintCallable, Category = "Kinect")
+		bool getRightHandState();
 };

@@ -1,5 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+using System;
+using System.IO;
 using UnrealBuildTool;
 
 public class XKinect : ModuleRules
@@ -7,8 +9,10 @@ public class XKinect : ModuleRules
 	public XKinect(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
-		PublicIncludePaths.AddRange(
+
+        PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "KinectSDK", "Kinect20.lib"));
+
+        PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
 				"C:\\Program Files\\Microsoft SDKs\\Kinect\\v2.0_1409\\inc"
@@ -49,6 +53,7 @@ public class XKinect : ModuleRules
 			{
 				// ... add any modules that your module loads dynamically here ...
 			}
-			);
+        );
 	}
+
 }
