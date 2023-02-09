@@ -27,6 +27,7 @@ public:
 	uint64_t trackingID;
 	HandState leftHandState, rightHandState;
 	FRotator orientations[JointType_Count];
+	FVector jointLocations[JointType_Count];
 	BOOLEAN bodyInit = false;
 
 protected:
@@ -42,10 +43,12 @@ public:
 	void initBodyFrame();
 	void updateBodyFrame();
 	FRotator OrientToFRotator(JointOrientation orientation, int i);
+
+private:
 	UFUNCTION(BlueprintCallable, Category = "Kinect")
-		FVector getJointPosition(int ind);
+		FVector getJointPosition(int32 ind);
 	UFUNCTION(BlueprintCallable, Category = "Kinect")
-		FRotator getJointRotation(int ind);
+		FRotator getJointRotation(int32 ind);
 	UFUNCTION(BlueprintCallable, Category = "Kinect")
 		bool getLeftHandState();
 	UFUNCTION(BlueprintCallable, Category = "Kinect")

@@ -40,8 +40,8 @@ bool AKinectActor::initKinect() {
 
 void AKinectActor::initBodyFrame() {
 	IBodyFrameSource* bodyFrameSource;
-	HRESULT hResult = sensor->get_BodyFrameSource(&bodyFrameSource);
-	if (SUCCEEDED(hResult)) {
+	HRESULT result = sensor->get_BodyFrameSource(&bodyFrameSource);
+	if (SUCCEEDED(result)) {
 		bodyFrameSource->OpenReader(&bodyFrameReader);
 	}
 	if (bodyFrameReader == nullptr) {
@@ -76,6 +76,7 @@ void AKinectActor::updateBodyFrame() {
 			if (SUCCEEDED(res)) {
 				for (int j = 0; j < JointType_Count; j++) {
 					orientations[j] = OrientToFRotator(jointOrientations[j], j);
+					jointLocations[j] = FVector(joints[j].Position.X, joints[j].Position.Y, joints[j].Position.Z);
 				}
 			}
 		}
@@ -107,11 +108,12 @@ FRotator AKinectActor::OrientToFRotator(JointOrientation orientation, int i) {
 	return FRotator(FQuat(w1, x1, y1, z1));
 }
 
-FVector AKinectActor::getJointPosition(int ind) {
-	return FVector(0, 0, 0);
+FVector AKinectActor::getJointPosition(int32 ind) {
+	return jointLocations[ind];
 }
 
-FRotator AKinectActor::getJointRotation(int ind) {
+FRotator AKinectActor::getJointRotation(int32 ind) {
+	//return FRotator(orientations[ind].Pitch, orientations[ind].Yaw, orientations[ind].Roll);
 	return orientations[ind];
 }
 
