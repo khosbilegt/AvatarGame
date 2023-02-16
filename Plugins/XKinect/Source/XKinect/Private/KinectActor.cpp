@@ -117,7 +117,6 @@ FRotator AKinectActor::getJointRotation(int32 ind) {
 	return orientations[ind];
 }
 
-
 bool AKinectActor::getRightHandState() {
 	return rightHandState == HandState_Closed;
 }
