@@ -43,8 +43,10 @@ void AKinectActor::initBodyFrame() {
 	HRESULT result = sensor->get_BodyFrameSource(&bodyFrameSource);
 	if (SUCCEEDED(result)) {
 		bodyFrameSource->OpenReader(&bodyFrameReader);
+		isKinectAvailable = true;
 	}
 	if (bodyFrameReader == nullptr) {
+		isKinectAvailable = false;
 		return;
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Body Frame Reader is ready..."));
@@ -61,6 +63,8 @@ void AKinectActor::updateBodyFrame() {
 	if (FAILED(res)) {
 		return;
 	}
+
+	isKinectAvailable = true;
 	bodyFrame->GetAndRefreshBodyData(BODY_COUNT, bodies);
 	BOOLEAN tracked = false;
 	

@@ -30,6 +30,9 @@ public:
 	FVector jointLocations[JointType_Count];
 	BOOLEAN bodyInit = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Kinect")
+	bool isKinectAvailable = false;
+
 protected:
 	virtual void BeginPlay() override;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
