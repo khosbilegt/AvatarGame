@@ -56,4 +56,6 @@ private:
 		bool getLeftHandState();
 	UFUNCTION(BlueprintCallable, Category = "Kinect")
 		bool getRightHandState();
+	UFUNCTION(BlueprintCallable, Category = "Kinect")
+		bool getKinectConnected();
 };

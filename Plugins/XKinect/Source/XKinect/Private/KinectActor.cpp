@@ -128,3 +128,12 @@ bool AKinectActor::getRightHandState() {
 bool AKinectActor::getLeftHandState() {
 	return leftHandState == HandState_Closed;
 }
+
+bool AKinectActor::getKinectConnected() {
+	BOOLEAN result;
+	sensor->get_IsAvailable(&result);
+	if (result) {
+		return true;
+	}
+	return false;
+}
