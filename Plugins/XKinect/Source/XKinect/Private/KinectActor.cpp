@@ -137,3 +137,21 @@ bool AKinectActor::getKinectConnected() {
 	}
 	return false;
 }
+
+int AKinectActor::getCenteredBody(IBody* bodies[], int count) {
+	int centeredBody = 0;
+	bodies[0]->GetJoints(JointType_Count, joints);
+	FVector centeredLocation = FVector(joints[0].Position.X, joints[0].Position.Y, joints[0].Position.Z);
+	float centeredDistance = FVector::Dist(centeredLocation, FVector());
+	for (int i = 0; i < count; i++) {
+		bodies[i]->GetJoints(JointType_Count, joints);
+		FVector location = FVector(joints[0].Position.X, joints[0].Position.Y, joints[0].Position.Z);
+		if (FVector::Dist(location, FVector()) < centeredDistance) {
+			centeredBody = i;
+			centeredLocation = location;
+			centeredDistance = FVector::Dist(location, FVector());
+		}
+	}
+	return centeredBody;
+}
+

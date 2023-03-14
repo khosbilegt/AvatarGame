@@ -58,4 +58,5 @@ private:
 		bool getRightHandState();
 	UFUNCTION(BlueprintCallable, Category = "Kinect")
 		bool getKinectConnected();
+	int getCenteredBody(IBody* bodies[], int count);
 };
