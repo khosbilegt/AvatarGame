@@ -60,6 +60,22 @@
 			"Type": "DynamicLibrary"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/VaRestPlugin/Binaries/Win64/UE4Editor-VaRest.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/VaRestPlugin/Binaries/Win64/UE4Editor-VaRest.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/VaRestPlugin/Binaries/Win64/UE4Editor-VaRestEditor.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/VaRestPlugin/Binaries/Win64/UE4Editor-VaRestEditor.pdb",
+			"Type": "SymbolFile"
+		},
+		{
 			"Path": "$(ProjectDir)/Plugins/XKinect/Binaries/Win64/UE4Editor-XKinect.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -2428,6 +2444,10 @@
 			"Type": "RequiredResource"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/VaRestPlugin/Binaries/Win64/UE4Editor.modules",
+			"Type": "RequiredResource"
+		},
+		{
 			"Path": "$(ProjectDir)/Plugins/XKinect/Binaries/Win64/UE4Editor.modules",
 			"Type": "RequiredResource"
 		},
@@ -2931,6 +2951,10 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Media/ElectraCDM/ElectraCDM.uplugin",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/VaRestPlugin/VaRest.uplugin",
 			"Type": "UFS"
 		},
 		{
