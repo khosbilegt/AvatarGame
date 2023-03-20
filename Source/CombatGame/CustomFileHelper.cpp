@@ -16,7 +16,7 @@ void ACustomFileHelper::BeginPlay()
 
 FString ACustomFileHelper::loadFile(FString fileName) {
     FString file = FPaths::ProjectSavedDir();
-    file.Append(TEXT("Colors.json"));
+    file.Append(fileName);
     IPlatformFile& FileManager = FPlatformFileManager::Get().GetPlatformFile();
     FString FileContent;
     if (FileManager.FileExists(*file))
@@ -32,7 +32,7 @@ FString ACustomFileHelper::loadFile(FString fileName) {
     }
     else
     {
-        UE_LOG(LogTemp, Warning, TEXT("FileManipulation: ERROR: Can not read the file because it was not found."));
+        UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Couldn't find %s"), *file);
         UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Expected file location: %s"), *file);
     }
     return FileContent;
@@ -40,24 +40,16 @@ FString ACustomFileHelper::loadFile(FString fileName) {
 
 void ACustomFileHelper::saveFile(FString fileName, FString content) {
     FString file = FPaths::ProjectSavedDir();
-    file.Append(content);
+    file.Append(fileName);
 
     IPlatformFile& FileManager = FPlatformFileManager::Get().GetPlatformFile();
 
-    if (FileManager.FileExists(*file))
+    if (FFileHelper::SaveStringToFile(content, *file))
     {
-        if (FFileHelper::SaveStringToFile(content, *file))
-        {
-            UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Sucsesfuly Written: \"%s\" to the text file"), *content);
-        }
-        else
-        {
-            UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Failed to write FString to file."));
-        }
+        UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Sucsesfuly Written: \"%s\" to the text file"), *content);
     }
     else
     {
-        UE_LOG(LogTemp, Warning, TEXT("FileManipulation: ERROR: Can not read the file because it was not found."));
-        UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Expected file location: %s"), *file);
+        UE_LOG(LogTemp, Warning, TEXT("FileManipulation: Failed to write FString to file."));
     }
 }
