@@ -17,7 +17,7 @@ public class XKinect : ModuleRules
 				// ... add public include paths required here ...
 				"C:\\Program Files\\Microsoft SDKs\\Kinect\\v2.0_1409\\inc"
             }
-			);
+		);
 				
 		
 		PrivateIncludePaths.AddRange(
