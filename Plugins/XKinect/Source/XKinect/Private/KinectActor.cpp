@@ -68,6 +68,7 @@ void AKinectActor::updateBodyFrame() {
 	bodyFrame->GetAndRefreshBodyData(BODY_COUNT, bodies);
 	BOOLEAN tracked = false;
 	
+	
 	for (int i = 0; i < BODY_COUNT; i++) {
 		bodies[i]->get_IsTracked(&tracked);
 		if (tracked) {
